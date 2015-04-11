@@ -1,0 +1,27 @@
+{
+  "name": "SlackEden",
+  "version": "0.0.1",
+  "authors": [
+    "Harry Reeder <harry@harryreeder.co.uk>"
+  ],
+  "description": "A Slack Team Management Site for New Eden's Use",
+  "keywords": [
+    "eve",
+    "online",
+    "slack"
+  ],
+  "license": "MIT",
+  "homepage": "http://slackeden.net/",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "2.1.3",
+    "bootstrap": "3.3.4"
+  }
+}

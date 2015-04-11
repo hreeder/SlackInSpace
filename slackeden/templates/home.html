@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <img class="pull-right" src="https://image.eveonline.com/Character/{{ current_user.id }}_256.jpg" alt=""/>
+    <h1>Welcome to SlackEden</h1>
+    <p>You are now signed in as {{ current_user.name }}</p>
+    <div class="clearfix"></div>
+</div>
+<div class="row">
+    <div class="col-md-6">{% if current_user.get_corp_name() %}
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h3 class="panel-title">{{ current_user.get_corp_name() }}</h3></div>
+            <div class="panel-body">
+                <img src="https://image.eveonline.com/Corporation/{{ current_user.corporation.id }}_128.png" class="pull-right" alt=""/>
+                {% if current_user.corporation.team %}
+                {% else %}
+                <i>There is no team configured for {{ current_user.corporation.name }}</i>
+                {% endif %}
+            </div>
+        </div>
+    </div>{% endif %}
+
+    <div class="col-md-6">{% if current_user.get_alliance_name() %}
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h3 class="panel-title">{{ current_user.get_alliance_name() }}</h3></div>
+            <div class="panel-body">
+                <img src="https://image.eveonline.com/Alliance/{{ current_user.corporation.alliance.id }}_128.png" class="pull-right" alt=""/>
+                {% if current_user.corporation.alliance.team %}
+                {% else %}
+                <i>There is no team configured for {{ current_user.corporation.alliance.name }}</i>
+                {% endif %}
+            </div>
+        </div>
+    </div>{% endif %}
+</div>
+{% endblock %}
