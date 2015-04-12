@@ -14,19 +14,11 @@ def update_corp_info(corpid):
             corp_api = evelink.corp.Corp(api=api)
             info = corp_api.corporation_sheet(corp_id=corp.id).result
 
-            alliance = Alliance.query.filter_by(id=info['alliance']['id']).first()
-            if not alliance:
-                alliance = Alliance(
-                    id=info['alliance']['id'],
-                    name=info['alliance']['name']
-                )
-                db.session.add(alliance)
-                db.session.commit()
-
             changes = False
 
-            if corp.alliance_id != alliance.id:
-                corp.alliance_id = alliance.id
+            # Corp not in right alliance
+            if corp.alliance_id != info['alliance']['id']:
+                corp.alliance_id = info['alliance']['id']
                 changes = True
 
             if corp.ticker != info['ticker']:
