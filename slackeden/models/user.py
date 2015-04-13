@@ -1,6 +1,7 @@
 from flask.ext.login import UserMixin
 
 from slackeden import db, lm
+from slackeden.models import TeamMember
 
 
 class User(db.Model, UserMixin):
@@ -27,6 +28,9 @@ class User(db.Model, UserMixin):
             return "<" + self.corporation.alliance.ticker + ">"
         else:
             return ""
+
+    def membership(self, team):
+        return TeamMember.query.filter_by(user_id=self.id, team_id=team.id).first()
 
 
 @lm.user_loader

@@ -17,6 +17,21 @@
             <div class="panel-body">
                 <img src="https://image.eveonline.com/Corporation/{{ current_user.corporation.id }}_128.png" class="pull-right" alt=""/>
                 {% if current_user.corporation.team %}
+                {% with membership = current_user.membership(current_user.corporation.team) %}
+                <p><b>Slack Team</b>: {{ current_user.corporation.team.name }}</p>
+                <p><b>Slack URL</b>: <a href="https://{{ current_user.corporation.team.subdomain }}.slack.com/">https://{{ current_user.corporation.team.subdomain }}.slack.com/</a></p>
+                {% if membership %}
+                <p><b>E-Mail</b>: {{ membership.email_address }}</p>
+                {% endif %}
+                <br>
+                <p>
+                    {% if membership %}
+                    <a href="https://{{ current_user.corporation.team.subdomain }}.slack.com/messages" class="btn btn-primary btn-lg">Go To</a>
+                    {% else %}
+                    <a href="{{ url_for('join_team', id=current_user.corporation.team.id) }}" class="btn btn-primary btn-lg">Get Invite</a>
+                    {% endif %}
+                </p>
+                {% endwith %}
                 {% else %}
                 <i>There is no team configured for {{ current_user.corporation.name }}</i>
                 {% endif %}
