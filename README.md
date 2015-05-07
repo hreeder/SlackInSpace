@@ -1,4 +1,4 @@
-# SlackEden
+# SlackInSpace
 
 A tool to manage Slack Teams for EVE Online Corporations and Alliances (and more!)
 
